@@ -1,7 +1,9 @@
 package com.technoworks.FusionClient;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,13 +13,38 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+    static int count=0;
+
     /**
      * Called when the activity is first created.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        myLog("onCreate");
         super.onCreate(savedInstanceState);
+        if (savedInstanceState == null){
+            myLog("instance is null");
+        } else {
+            myLog("loaded : "+ savedInstanceState.get("test"));
+        }
         setContentView(R.layout.main);
+    }
+
+    @Override
+    protected void onResume() {
+        myLog("on Resume");
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        myLog("onRestore :");
+        if (savedInstanceState == null){
+            myLog("instance is null");
+        } else {
+            myLog("loaded : "+ savedInstanceState.get("test"));
+        }
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
@@ -28,6 +55,13 @@ public class MainActivity extends Activity {
 
     public void setSettingsView(MenuItem item){
         setContentView(R.layout.settings);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("test","we was saved");
+        myLog("we try to save");
     }
 
     @Override
@@ -60,5 +94,9 @@ public class MainActivity extends Activity {
                 "\n show me = " + checkBox.isChecked(), Toast.LENGTH_SHORT).show();
 
         setContentView(previousViewID);
+    }
+
+    public static void myLog(String s){
+        Log.d("mylog",s);
     }
 }

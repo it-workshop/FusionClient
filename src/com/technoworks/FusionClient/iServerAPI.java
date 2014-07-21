@@ -3,7 +3,7 @@ package com.technoworks.FusionClient;
 /**
  * Created by lgor on 06.07.14.
  */
-public interface ServerAPI {
+public interface iServerAPI {
 
     /**
      * примерное описание API
@@ -20,4 +20,19 @@ public interface ServerAPI {
      * и т.д
      */
 
+    public static class Singleton{
+        private Singleton() {
+        }
+
+        private static iServerAPI APIrealization = null;
+
+        public static iServerAPI get() {
+            synchronized (APIrealization){
+                if (APIrealization == null){
+                    //APIrealization = new iServerAPI();
+                }
+                return APIrealization;
+            }
+        }
+    }
 }
