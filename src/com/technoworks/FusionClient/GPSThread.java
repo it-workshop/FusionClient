@@ -1,16 +1,22 @@
 package com.technoworks.FusionClient;
 
+import android.content.Context;
+import android.location.LocationListener;
+
+import java.security.Provider;
+
 /**
  * Created by lgor on 21.07.14.
  */
-public class GPSThread implements Runnable{
+public class GPSThread implements Runnable {
 
-    private static GPSThread daemon = null;
+    private static GPSThread daemon;
 
     private Thread mThread;
     private volatile boolean running = true;
 
-    private GPSThread(){
+
+    private GPSThread() {
         mThread = new Thread(this);
         mThread.setDaemon(true);
         mThread.start();
@@ -18,20 +24,20 @@ public class GPSThread implements Runnable{
 
     @Override
     public void run() {
-        while(running){
+        while (running) {
             //GPS update thread
 
 
         }
     }
 
-    public void stop(){
+    public void stop() {
         running = false;
     }
 
-    public static GPSThread getThread(){
-        synchronized (daemon){
-            if (daemon == null || !daemon.running){
+    public static GPSThread getThread() {
+        synchronized (daemon) {
+            if (daemon == null || !daemon.running) {
                 daemon = new GPSThread();
             }
         }

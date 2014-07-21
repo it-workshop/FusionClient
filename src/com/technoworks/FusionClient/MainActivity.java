@@ -14,6 +14,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
     static int count=0;
+    public GPSTracker mGPSTracker;
 
     /**
      * Called when the activity is first created.
@@ -28,6 +29,17 @@ public class MainActivity extends Activity {
             myLog("loaded : "+ savedInstanceState.get("test"));
         }
         setContentView(R.layout.main);
+        mGPSTracker = new GPSTracker(MainActivity.this);
+        if (mGPSTracker.canGetLocation())
+        {
+            double latitude = mGPSTracker.getLatitude();
+            double longitute = mGPSTracker.getLongitude();
+            Toast.makeText(getApplicationContext(), "lat: " + latitude + " long: " + longitute, Toast.LENGTH_LONG);
+        }
+        else
+        {
+            mGPSTracker.showSettingsAlert();
+        }
     }
 
     @Override
@@ -64,16 +76,16 @@ public class MainActivity extends Activity {
         myLog("we try to save");
     }
 
-    @Override
-    public void onBackPressed() {
-        switch (currentViewID){
-            case R.layout.settings:
-                setContentView(R.layout.main);
-                return;
-            default:
-                super.onBackPressed();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        switch (currentViewID){
+//            case R.layout.settings:
+//                setContentView(R.layout.main);
+//                return;
+//            default:
+//                super.onBackPressed();
+//        }
+//    }
 
     private int currentViewID;
     private int previousViewID;
