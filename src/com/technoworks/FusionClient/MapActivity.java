@@ -7,4 +7,5 @@ import android.app.Activity;
  * Created by lgor on 21.07.14.
  */
 public class MapActivity extends Activity{
+
 }
