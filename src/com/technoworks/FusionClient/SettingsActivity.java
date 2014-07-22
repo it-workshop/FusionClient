@@ -27,9 +27,10 @@ public class SettingsActivity extends Activity {
         }
 
         private boolean isCorrect() {
-            return true;
+            return nickname.contains("@");
         }
 
+        // 4debug
         @Override
         public String toString() {
             return "server adress = " + server + "\nnickname = " + nickname + "\nsendGPS = " + sendGPSWhenHide;
@@ -38,10 +39,19 @@ public class SettingsActivity extends Activity {
 
     private SettingsState settingsNow;
 
+    private EditText
+            fieldServer,    //server address
+            userID;         //user identifier - email or nickname
+    private CheckBox boxAboutGPS;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+
+        boxAboutGPS = (CheckBox) findViewById(R.id.checkShowMeOnMap);
+        fieldServer = (EditText) findViewById(R.id.serverAddress);
+        userID = (EditText) findViewById(R.id.email);
     }
 
     @Override
@@ -49,55 +59,64 @@ public class SettingsActivity extends Activity {
         super.onResume();
         if (settingsNow == null) {
             settingsNow = loadSettings(this);
-            ((EditText) findViewById(R.id.serverAddress)).setText(settingsNow.server, TextView.BufferType.EDITABLE);
-            ((EditText) findViewById(R.id.email)).setText(settingsNow.nickname, TextView.BufferType.EDITABLE);
-            ((CheckBox) findViewById(R.id.checkShowMeOnMap)).setChecked(settingsNow.sendGPSWhenHide);
+
+            fieldServer.setText(settingsNow.server, TextView.BufferType.EDITABLE);
+            userID.setText(settingsNow.nickname, TextView.BufferType.EDITABLE);
+            boxAboutGPS.setChecked(settingsNow.sendGPSWhenHide);
         }
     }
 
     public void savePropertiesClick(View v) {
         // можно коварно отредактировать текст так, что не вызовется onFieldClick.
-        // чтобы наверняка, вызовем ещё разок
+        // чтобы наверняка, вызовем ещё разок. такой вот костыль
         onFieldsClick(null);
-        if (!settingsNow.isCorrect()) return;
-        saveSettings(settingsNow);
+        if (settingsNow.isCorrect()) {
+            saveSettings(settingsNow);
+        }
     }
 
     public void onFieldsClick(View v) {
-        settingsNow.nickname = ((EditText) findViewById(R.id.email)).getText().toString();
-        settingsNow.server = ((EditText) findViewById(R.id.serverAddress)).getText().toString();
-        settingsNow.sendGPSWhenHide = ((CheckBox) findViewById(R.id.checkShowMeOnMap)).isChecked();
+        settingsNow.nickname = userID.getText().toString();
+        settingsNow.server = fieldServer.getText().toString();
+        settingsNow.sendGPSWhenHide = boxAboutGPS.isChecked();
+
         int color = settingsNow.isCorrect() ? 0xFF00FF00 : 0x77FF0000;
-        findViewById(R.id.savePropertiesButton).setDrawingCacheBackgroundColor(color);
-        myLog("onFieldsClick, settings = " + settingsNow);
+        findViewById(R.id.savePropertiesButton).setBackgroundColor(color);
+        //myLog("onFieldsClick, settings = " + settingsNow);
     }
 
     @Override
     public void onBackPressed() {
         settingsNow = null;
-        super.onBackPressed();
+        super.onBackPressed();      // return to previous activity
     }
 
     //naive realization
     private boolean saveSettings(SettingsState settings) {
         SharedPreferences pref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.clear(); //нужно ли?
+
         editor.putString("server", settings.server);
-        editor.putString("nickname", settings.nickname);
+        editor.putString("userID", settings.nickname);
         editor.putBoolean("sendGPS", settings.sendGPSWhenHide);
+
         boolean success = editor.commit();
-        myLog("settings saving = " + success + " :\n" + settings);
+        //myLog("settings saving = " + success + " :\n" + settings);
         return success;
     }
 
+    /**
+     * любое активити сможет узнать настройки
+     */
     public static SettingsState loadSettings(Activity activity) {
         SharedPreferences pref = activity.getPreferences(MODE_PRIVATE);
         SettingsState settings = new SettingsState();
+
         settings.server = pref.getString("server", "def server value");
-        settings.nickname = pref.getString("nickname", "");
+        settings.nickname = pref.getString("userID", "");
         settings.sendGPSWhenHide = pref.getBoolean("sendGPS", false);
-        myLog("settings loading :\n" + settings);
+
+        //myLog("settings loading :\n" + settings);
         return settings;
     }
 
