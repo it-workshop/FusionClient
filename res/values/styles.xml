@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="mainStyle" parent="android:Theme.Holo.Light.DarkActionBar">
+
+    </style>
+
+    <style name="errorStyle" parent="mainStyle">
+        <item name="android:editTextColor">@color/errorButtonColor</item>
+    </style>
+
+    <style name="readyStyle" parent="mainStyle">
+        <item name="android:shadowColor">@color/readyButtonColor</item>
+    </style>
+
+    <style name="neutralStyle" parent="mainStyle">
+    </style>
+
+</resources>

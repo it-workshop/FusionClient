@@ -53,15 +53,13 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu)
-    {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
-    public void setSettingsView(MenuItem item)
-    {
-        Intent intent = new Intent(this, Settings.class);
+    public void setSettingsView(MenuItem item) {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }
