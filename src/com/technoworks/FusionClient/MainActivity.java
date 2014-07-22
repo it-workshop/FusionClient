@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
     }
 
     public void setSettingsView(MenuItem item) {
-        Intent intent = new Intent(this, Settings.class);
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }

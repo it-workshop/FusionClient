@@ -15,8 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/serverAddress"
-            android:text="192.168.0.1" android:autoText="false" android:inputType="textWebEditText"
-            android:onClick="validate"/>
+            android:text="192.168.0.1"
+            android:autoText="false"
+            android:inputType="textWebEditText"
+            android:onClick="onFieldsClick"/>
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -25,18 +27,19 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/email"
             android:inputType="textEmailAddress"
-            android:ems="10"
-            android:id="@+id/email" android:onClick="validate"/>
+            android:onClick="onFieldsClick"
+            android:linksClickable="false"/>
     <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Show me on map"
-            android:id="@+id/checkShowMeOnMap" android:checked="true"/>
+            android:id="@+id/checkShowMeOnMap" android:checked="true" android:onClick="onFieldsClick"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save all"
             android:id="@+id/savePropertiesButton" android:clickable="true" android:singleLine="false"
-            android:onClick="saveProperties"/>
+            android:onClick="savePropertiesClick"/>
 </LinearLayout>
