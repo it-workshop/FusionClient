@@ -15,13 +15,13 @@
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/editText"
-            android:layout_below="@+id/textView" android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+            android:layout_below="@+id/textView"
+            android:layout_alignParentLeft="true"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="address of destination"
-            android:id="@+id/textView" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+            android:id="@+id/textView" android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"/>
 </RelativeLayout>
