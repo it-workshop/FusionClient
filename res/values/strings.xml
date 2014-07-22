@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">FusionClient</string>
     <string name="main_copterRequestButton">Request Copter!</string>
+
     <string name="settings_serverAddress">Server Address</string>
     <string name="settings_userID">email</string>
     <string name="settings_GPSCheckBox">Show me on map</string>
