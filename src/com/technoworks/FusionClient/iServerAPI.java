@@ -1,6 +1,9 @@
 package com.technoworks.FusionClient;
 
+import java.util.List;
+
 /**
+ * что-то вроде api
  * Created by lgor on 06.07.14.
  */
 public interface iServerAPI {
@@ -18,7 +21,21 @@ public interface iServerAPI {
      * getLocation()
      *
      * и т.д
+     *
+     * пока всё очень тестовое и с заглушками
      */
+    public iLocation getCopter();
+
+    /**
+     * @return success of sending
+     */
+    public boolean sendMyLocation(iLocation me);
+
+    public boolean serverAvailible();
+
+    public List<iLocation> loadLocations();
+
+    public boolean requestCopter();
 
     public static class Singleton{
         private Singleton() {
@@ -29,7 +46,7 @@ public interface iServerAPI {
         public static iServerAPI get() {
             synchronized (APIrealization){
                 if (APIrealization == null){
-                    //APIrealization = new iServerAPI();
+                    APIrealization = new ServerFake();
                 }
                 return APIrealization;
             }

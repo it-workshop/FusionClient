@@ -12,5 +12,5 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:clickable="true"
-            android:padding="16dp"/>
+            android:padding="16dp" android:onClick="setNextView"/>
 </RelativeLayout>

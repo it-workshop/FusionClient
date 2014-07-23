@@ -33,7 +33,7 @@ public class SettingsActivity extends Activity {
         // 4debug
         @Override
         public String toString() {
-            return "server adress = " + server + "\nnickname = " + nickname + "\nsendGPS = " + sendGPSWhenHide;
+            return "server address = " + server + "\nnickname = " + nickname + "\nsendGPS = " + sendGPSWhenHide;
         }
     }
 
@@ -100,9 +100,8 @@ public class SettingsActivity extends Activity {
         editor.putString("userID", settings.nickname);
         editor.putBoolean("sendGPS", settings.sendGPSWhenHide);
 
-        boolean success = editor.commit();
+        return editor.commit();
         //myLog("settings saving = " + success + " :\n" + settings);
-        return success;
     }
 
     /**
