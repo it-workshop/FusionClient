@@ -3,6 +3,7 @@ package com.technoworks.FusionClient;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,9 +11,7 @@ import android.view.View;
 public class MainActivity extends Activity {
 
     private int currentViewID;
-
-    //GPSTracker mGPSTracker;
-    //Button btnReqQop;
+    private static String LOG_START_ACTIVITY = "App MainActivity";
 
     /**
      * Called when the activity is first created.
@@ -21,32 +20,8 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
-        /*btnReqQop = (Button) findViewById(R.id.);
-
-        btnReqQop.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                mGPSTracker = new GPSTracker(MainActivity.this);
-                if (mGPSTracker.canGetLocation())
-                {
-                    double latitude = mGPSTracker.getLatitude();
-                    double longitude = mGPSTracker.getLongitude();
-
-                    Toast.makeText(getApplicationContext(), "lat = " + latitude + " long " + longitude, Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    mGPSTracker.showSettingsAlert();
-                }
-
-            }
-        });
-        */
-
-
+        Log.d(LOG_START_ACTIVITY, "MainActivity start");
+        startService(new Intent(this, BackgroundService.class));
     }
 
     @Override
@@ -56,6 +31,8 @@ public class MainActivity extends Activity {
     }
 
     public void setSettingsView(MenuItem item) {
+
+        Log.d(LOG_START_ACTIVITY, "Options menu create");
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }

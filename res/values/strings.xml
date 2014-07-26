@@ -7,4 +7,9 @@
     <string name="settings_userID">email</string>
     <string name="settings_GPSCheckBox">Show me on map</string>
     <string name="settings_saveButton">Save all</string>
+
+    <string name="dialog_settings_title">Warning</string>
+    <string name="dialog_setting_msg">GPS is not available. Do you want to open settings?</string>
+    <string name="dialog_setting_btnYes">Yes</string>
+    <string name="dialog_setting_btnNo">No</string>
 </resources>
