@@ -7,9 +7,6 @@ import android.os.IBinder;
 import android.util.Log;
 
 
-/**
- * Created by Nats on 22.07.2014.
- */
 public class BackgroundService extends Service
 {
     final String LOG_TAG_SERVICE = "App Service";
@@ -22,18 +19,6 @@ public class BackgroundService extends Service
     {
         super.onCreate();
         Log.d(LOG_TAG_SERVICE, "Service onCreate");
-
-    }
-
-    public void onDestroy()
-    {
-        super.onDestroy();
-        Log.d(LOG_TAG_SERVICE, "Service onDestroy");
-    }
-
-    public int onStartCommand(Intent intent, int flags, int startId)
-    {
-        Log.d(LOG_TAG_SERVICE, "Service onStartCommand");
         try
         {
             mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -53,7 +38,21 @@ public class BackgroundService extends Service
         {
             e.printStackTrace();
         }
+
+    }
+
+    public void onDestroy()
+    {
+        super.onDestroy();
+        Log.d(LOG_TAG_SERVICE, "Service onDestroy");
+    }
+
+    public int onStartCommand(Intent intent, int flags, int startId)
+    {
+        Log.d(LOG_TAG_SERVICE, "Service onStartCommand");
+
         return super.onStartCommand(intent, flags, startId);
+
     }
 
     @Override
