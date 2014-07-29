@@ -21,7 +21,7 @@ public class GPSThread implements Runnable{
         while(running){
             //GPS update thread
 
-
+            //втф?
         }
     }
 
