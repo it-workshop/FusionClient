@@ -1,22 +1,11 @@
 package com.technoworks.FusionClient;
 
-import android.app.AlertDialog;
-import android.app.Service;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.app.*;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
 import android.os.IBinder;
-import android.provider.*;
-import android.provider.Settings;
 import android.util.Log;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Nats on 22.07.2014.
@@ -33,6 +22,7 @@ public class BackgroundService extends Service
     {
         super.onCreate();
         Log.d(LOG_TAG_SERVICE, "Service onCreate");
+
     }
 
     public void onDestroy()
@@ -53,7 +43,6 @@ public class BackgroundService extends Service
             {
                 mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_TO_UPDATE, 0, mGPSModule);
                 Log.d(LOG_TAG_SERVICE, "GPS Enabled");
-
             }
             else
             {
@@ -73,8 +62,4 @@ public class BackgroundService extends Service
         Log.d(LOG_TAG_SERVICE, "Service onBind");
         return null;
     }
-
-
-
-
 }
